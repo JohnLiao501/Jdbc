@@ -20,7 +20,7 @@ public class Jdbc {
             //注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
-            sql="select * from user";
+            sql="select * from student";
             //路由对象
             pst = connection.prepareStatement(sql);
             pst.executeQuery();
@@ -32,7 +32,7 @@ public class Jdbc {
             {
                 String username = resultSet.getString("username");
                 int age = resultSet.getInt("age");
-                String pwd=resultSet.getString("passwd");
+                String pwd=resultSet.getString("password");
                 int userId=resultSet.getInt("userId");
                 //封装
                 com.cn.pojo.user user1=new user();
@@ -41,6 +41,7 @@ public class Jdbc {
                 user1.setPasswd(pwd);
                 user1.setAge(age);
                 System.out.println("用户对象："+user1);
+                users.add(user1);
                 System.out.println("用户对象集合："+users);
             }
             System.out.println("连接成功!");
