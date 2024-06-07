@@ -59,7 +59,7 @@
                 <el-input v-model="userInfo.username" placeholder="请输入用户名" style="width: 300px"></el-input>
             </el-form-item>
             <el-form-item label="用户密码">
-                <el-input v-model="userInfo.username" placeholder="请输入用户密码" style="width: 300px"></el-input>
+                <el-input v-model="userInfo.password" placeholder="请输入用户密码" style="width: 300px"></el-input>
             </el-form-item>
             </el-form>
         <div class="l-bottom">
