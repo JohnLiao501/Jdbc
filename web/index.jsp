@@ -100,15 +100,13 @@
                     success: function(data) {   //返回函数
                         console.log(data)
                         if(data.code === 200){
-                            // window.location.href = "./login.jsp"
+                            window.location.href = "./login.jsp"
                         }
+                        this.$message('哎呀，登录失败了！');
                     }
                 })
             }
         }
     })
 </script>
-
-
-
 </html>

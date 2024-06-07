@@ -1,6 +1,9 @@
 package com.cn.shixun.servlet;
 
+import com.cn.shixun.pojo.Result;
+import com.cn.shixun.pojo.User;
 import com.cn.shixun.util.JdbcUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,11 +25,18 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //业务
+        req.setCharacterEncoding("utf-8");   //防止中文乱码
+        resp.setCharacterEncoding("utf-8");
 
+//        业务
 
+//        (1)拿数据
+        String name = req.getParameter("name");
+        String pwd = req.getParameter("pwd");
+        System.out.println("用户交互数据:"+name+pwd);
+
+//        (2)使用Jdbc
         System.out.println("欢迎登录！");
-
         Connection conn = null;
         try {
             conn = JdbcUtil.getConnection();
@@ -34,11 +44,24 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException(e);
         }
-
         try {
             JdbcUtil.closeAll(conn,null,null);
         } catch (SQLException e) {
             throw new ServletException(e);
         }
+
+//        (3)响应
+        resp.getWriter().write("响应成功！");
+
+//        注释：前端数据 三要素：状态码、信息、数据
+        User user = new User("John");
+        new Result(200,"登录成功！",user);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(user);
+
+        resp.getWriter().write(json);
+
+
     }
 }
