@@ -12,15 +12,13 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
     <style>
-        body{
-            background-color: cornsilk;
-        }
-
         .login{
             width:500px;
             height:450px;
-            background-color: aqua;
+            background-color: #F5F5DC;
+            opacity: 0.8;
             margin:200px auto;
+            border-radius: 10px 10px 10px 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         }
 
@@ -49,8 +47,11 @@
 
 </head>
 <body>
+<video src="video/原神.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
+
+
 <div id="app">
-    <h1>Hello and Welcome!</h1>
+    <h1>欢迎来到提瓦特大陆!</h1>
     <div class="login">
         <h1>登录</h1>
 
@@ -65,7 +66,7 @@
         <div class="l-bottom">
             <button @click="login">登录</button>
         </div>
-        <span>忘记密码？<a href="#">立即注册！</a> </span>
+        <span>没有帐户？<a href="./register.jsp">立即注册！</a> </span>
     </div>
 
 </div>
@@ -87,10 +88,11 @@
         },
         methods: {
             login() {
+                let _this = this
                 console.log(this.userInfo.username)
                 console.log(this.userInfo.password)
                 $.ajax({
-                    url: "http://localhost:8081/S2024LJ/login",
+                    url: "http://localhost:8081/servlet_Web_exploded/login",
                     type: "post",
                     data: {
                         username: this.userInfo.username,
@@ -99,13 +101,18 @@
                     dataType:"JSON",    //返回的数据格式
                     success: function(data) {   //返回函数
                         console.log(data)
-                        console.log(data.code)
+                        console.log(data.info)
                         if(data.code === 200){
-                            window.location.href = "./login.jsp"
+                            _this.$message.success(data.info)
+                            setTimeout(function (){
+                                window.location.href = "./home.jsp"
+                            },2000);
+                        }else {
+                            setTimeout(function (){
+                                _this.$message.error('哎呀，登录失败了！');
+                            },2000);
                         }
-                        setTimeout(function (){
-                            this.$message('哎呀，登录失败了！');
-                        },2000);
+
                     }
                 })
             }

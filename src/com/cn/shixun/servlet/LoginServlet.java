@@ -26,14 +26,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");   //防止中文乱码
-        resp.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
 
 //        业务
-
 //        (1)拿数据
         String name = req.getParameter("name");
         String pwd = req.getParameter("pwd");
-        System.out.println("用户交互数据:"+name+pwd);
+        System.out.println("用户交互数据:" + name + pwd);
 
 //        (2)使用Jdbc
         System.out.println("欢迎登录！");
@@ -42,21 +41,21 @@ public class LoginServlet extends HttpServlet {
             conn = JdbcUtil.getConnection();
             System.out.println("数据库连接成功！");
         } catch (SQLException e) {
-            throw new ServletException(e);
+            throw new RuntimeException(e);
         }
         try {
             JdbcUtil.closeAll(conn,null,null);
         } catch (SQLException e) {
-            throw new ServletException(e);
+            throw new RuntimeException(e);
         }
 
 //        (3)响应
-
 //        注释：前端数据 三要素：状态码、信息、数据
         User user = new User("John");
-        Result result = new Result(500, "登录成功", user);
+        Result result = new Result(200, "登录成功", user);
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(result);
         resp.getWriter().write(s);
+//        resp.getWriter().println(result);
     }
 }

@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>当前是登录后的主页面</h1>
+<h1>当前是登录页面</h1>
 </body>
 </html>
