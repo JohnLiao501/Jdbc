@@ -47,11 +47,10 @@
 
 </head>
 <body>
-<video src="video/原神.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
-
+    <video src="video/原神.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
+    <img src ="img/ys.png" alt="原神">
 
 <div id="app">
-    <h1>欢迎来到提瓦特大陆!</h1>
     <div class="login">
         <h1>登录</h1>
 
@@ -68,7 +67,6 @@
         </div>
         <span>没有帐户？<a href="./register.jsp">立即注册！</a> </span>
     </div>
-
 </div>
 </body>
 <script src="./js/jquery-3.5.0.js"></script>
@@ -103,14 +101,14 @@
                         console.log(data)
                         console.log(data.info)
                         if(data.code === 200){
-                            _this.$message.success(data.info)
+                            _this.$message.success('欢迎来到提瓦特大陆！')
                             setTimeout(function (){
                                 window.location.href = "./home.jsp"
-                            },2000);
+                            },1000);
                         }else {
                             setTimeout(function (){
                                 _this.$message.error('哎呀，登录失败了！');
-                            },2000);
+                            },1000);
                         }
 
                     }
