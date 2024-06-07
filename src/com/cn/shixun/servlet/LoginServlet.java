@@ -51,17 +51,12 @@ public class LoginServlet extends HttpServlet {
         }
 
 //        (3)响应
-        resp.getWriter().write("响应成功！");
 
 //        注释：前端数据 三要素：状态码、信息、数据
         User user = new User("John");
-        new Result(200,"登录成功！",user);
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(user);
-
-        resp.getWriter().write(json);
-
-
+        Result result = new Result(500, "登录成功", user);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(result);
+        resp.getWriter().write(s);
     }
 }

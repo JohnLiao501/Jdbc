@@ -82,7 +82,7 @@
                 userInfo:{
                     username:"",
                     password:"",
-                },
+                }
             }
         },
         methods: {
@@ -99,10 +99,13 @@
                     dataType:"JSON",    //返回的数据格式
                     success: function(data) {   //返回函数
                         console.log(data)
+                        console.log(data.code)
                         if(data.code === 200){
                             window.location.href = "./login.jsp"
                         }
-                        this.$message('哎呀，登录失败了！');
+                        setTimeout(function (){
+                            this.$message('哎呀，登录失败了！');
+                        },2000);
                     }
                 })
             }
