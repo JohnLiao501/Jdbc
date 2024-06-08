@@ -78,20 +78,20 @@
         </div>
         <el-form label-width="100px" class="login-form">
             <el-form-item>
-                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px"></el-input>
+                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px"></el-input>
+                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.phonenumber" placeholder="电话号码" style="width: 300px"></el-input>
+                <el-input v-model="userInfo.phonenumber" placeholder="电话号码" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.email" placeholder="电子邮箱" style="width: 300px"></el-input>
+                <el-input v-model="userInfo.email" placeholder="电子邮箱" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
         </el-form>
         <div class="l-bottom">
-            <button @click="login" class="my-button"><span style="font-size: 130%;margin: auto;font-weight: bold">注 册</span></button>
+            <button @click="login" class="my-button" id="my-button"><span style="font-size: 130%;margin: auto;font-weight: bold">注 册</span></button>
         </div>
         <br>
         <br>
@@ -145,9 +145,11 @@
                                 _this.$message.error('哎呀，登录失败了！');
                             },1000);
                         }
-
                     }
                 })
+            },
+            handleEnter() {
+                this.login();
             }
         }
     })
