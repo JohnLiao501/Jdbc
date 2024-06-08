@@ -14,7 +14,7 @@ public class JdbcUtil {
     }
 
 
-    static String url = "jdbc:mysql://localhost:3306/johnliao?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    static String url = "jdbc:mysql://localhost:3306/mhy?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
     static String username="root";
 

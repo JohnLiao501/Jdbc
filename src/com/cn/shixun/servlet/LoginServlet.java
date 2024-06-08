@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -30,16 +32,26 @@ public class LoginServlet extends HttpServlet {
 
 //        业务
 //        (1)拿数据
-        String name = req.getParameter("name");
-        String pwd = req.getParameter("pwd");
+        String name = req.getParameter("username");
+        String pwd = req.getParameter("password");
         System.out.println("用户交互数据:" + name + pwd);
 
 //        (2)使用Jdbc
-        System.out.println("欢迎登录！");
         Connection conn = null;
+        User user = null;
         try {
             conn = JdbcUtil.getConnection();
             System.out.println("数据库连接成功！");
+            String sql="select * from user where username=? and password=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name);
+            ps.setString(2,pwd);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                user = new User();
+                String username = rs.getString("username");
+                user.setName(username);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -49,13 +61,14 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-//        (3)响应
-//        注释：前端数据 三要素：状态码、信息、数据
-        User user = new User("John");
-        Result result = new Result(200, "登录成功", user);
+        Result result;
+        if(user != null){
+            result = new Result(200, "登录成功", user);
+        }else{
+            result = new Result(500, "登录失败", user);
+        }
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(result);
         resp.getWriter().write(s);
-//        resp.getWriter().println(result);
     }
 }

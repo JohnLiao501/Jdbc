@@ -14,10 +14,10 @@
     <style>
         .login{
             width:500px;
-            height:450px;
+            height:470px;
             background-color: #F5F5DC;
             opacity: 0.8;
-            margin:200px auto;
+            margin:0 auto;
             border-radius: 15px 15px 15px 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         }
@@ -26,7 +26,7 @@
             padding-top: 50px;
         }
         .login-form{
-            padding-top: 50px;
+            /*padding-top: 50px;*/
             margin: auto;
         }
         .l-bottom{
@@ -38,7 +38,7 @@
             width: 200px;
             height: 40px;
             border-radius: 10px;
-            background-color: sandybrown;
+            background-color: orange;
             border: none;
             color: white;
             text-align: center;
@@ -46,14 +46,57 @@
             display: inline-block;
             margin: auto;
             cursor: pointer;
-            transition-duration: 0.4s; /* 添加过渡效果 */
+            transition-duration: 0.4s;
         }
         .my-button:hover {
-            background-color: black; /* 鼠标放上后变为灰色 */
-            color: sandybrown;
+            background-color: black;
+            color: orange;
         }
         span{
-            margin-left: 50px;
+            margin-left: 30px;
+        }
+        .imgBox{
+            padding: 40px 20px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            img{
+                width: 170px;
+            }
+        }
+
+        .choiceBox{
+            display: flex;
+            justify-content: center;
+            .itemBox:hover{
+                cursor: pointer;
+            }
+            .itemBox{
+                width: 300px;
+                display: flex;
+                justify-content: space-around;
+                .choiceItem{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .text{
+                        margin-bottom: 10px;
+                        font-weight: bolder;
+                    }
+                    .active{
+                        color: black;
+                    }
+                    .noActive{
+                        color: gray;
+                    }
+                    .line{
+                        width: 40px;
+                        height: 2px;
+                        background-color: orange;
+                    }
+                }
+            }
+            margin-bottom: 30px;
         }
     </style>
 
@@ -64,17 +107,40 @@
 
 <div id="app">
     <div class="login">
-        <h1><span style="font-size: 120%;margin: auto">登 录</span></h1>
-        <el-form label-width="100px" class="login-form">
+        <div class="imgBox">
+            <img src="img/mhyLogo2.png">
+        </div>
+        <div class="choiceBox">
+            <div class="itemBox">
+                <div class="choiceItem" @click="isMessage=true">
+                    <div class="text"  :class="isMessage?'active':'noActive'">短信登录</div>
+                    <div class="line" v-show="isMessage"></div>
+                </div>
+                <div class="choiceItem" @click="isMessage=false">
+                    <div class="text"  :class="!isMessage?'active':'noActive'">密码登录</div>
+                    <div class="line" v-show="!isMessage"></div>
+                </div>
+            </div>
+        </div>
+<%--        <h1><span style="font-size: 120%;margin: auto">登录</span></h1>--%>
+        <el-form label-width="100px" class="login-form" v-show="isMessage">
+            <el-form-item>
+                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-input v-model="phoneInfo.CAPTCHA" placeholder="验证码" style="width: 300px"></el-input>
+            </el-form-item>
+            </el-form>
+        <el-form label-width="100px" class="login-form" v-show="!isMessage">
             <el-form-item>
                 <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px"></el-input>
             </el-form-item>
-            </el-form>
+        </el-form>
         <div class="l-bottom">
-            <button @click="login" class="my-button"><span style="font-size: 130%;margin: auto">启 动 !</span></button>
+            <button @click="login" class="my-button"><span style="font-size: 130%;margin: auto;font-weight: bold">启 动 !</span></button>
         </div>
         <br>
         <br>
@@ -93,8 +159,13 @@
             return {
                 userInfo:{
                     username:"",
-                    password:"",
-                }
+                    password:""
+                },
+                phoneInfo:{
+                    phoneNumber:"",
+                    CAPTCHA:""
+                },
+                isMessage:true
             }
         },
         methods: {
@@ -117,11 +188,11 @@
                             _this.$message.success('欢迎来到提瓦特大陆！')
                             setTimeout(function (){
                                 window.location.href = "./home.jsp"
-                            },1000);
+                            },2500);
                         }else {
                             setTimeout(function (){
                                 _this.$message.error('哎呀，登录失败了！');
-                            },1000);
+                            });
                         }
 
                     }
