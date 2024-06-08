@@ -63,6 +63,8 @@
         <div class="l-bottom">
             <button @click="login"><span style="font-size: 130%;margin: auto">启 动 !</span></button>
         </div>
+        <br>
+        <br>
         <span>没有帐户？<a href="./register.jsp">立即注册！</a> </span>
     </div>
 </div>
