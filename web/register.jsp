@@ -90,7 +90,7 @@
                 <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.phonenumber" placeholder="手机号" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-input v-model="userInfo.email" placeholder="电子邮箱" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
@@ -117,7 +117,10 @@
                 userInfo:{
                     username:"",
                     password:"",
-                    phonenumber:"",
+                    email:"",
+                },
+                phoneInfo:{
+                    phoneNumber: "",
                 }
             }
         },
@@ -126,7 +129,7 @@
                 let _this = this
                 console.log(this.userInfo.username)
                 console.log(this.userInfo.password)
-                console.log(this.userInfo.phonenumber)
+                console.log(this.phoneInfo.phoneNumber)
                 console.log(this.userInfo.email)
                 $.ajax({
                     url: "http://localhost:8081/servlet_Web_exploded/login",
@@ -134,7 +137,7 @@
                     data: {
                         username: this.userInfo.username,
                         password: this.userInfo.password,
-                        phonenumber: this.userInfo.phonenumber,
+                        phoneNumber: this.phoneInfo.phoneNumber,
                         email:this.userInfo.email,
                     },
                     dataType:"JSON",    //返回的数据格式

@@ -181,7 +181,26 @@
                 this.isMessage = isSms;
             },
             login() {
-                let _this = this
+                if (this.isMessage) { // 短信登录
+                    if (!this.phoneInfo.phoneNumber) {
+                        this.$message.error('请输入手机号');
+                        return;
+                    }
+                    if (!this.phoneInfo.CAPTCHA) {
+                        this.$message.error('请输入验证码');
+                        return;
+                    }
+                    // 这里可以添加发送验证码验证的逻辑，然后再执行登录
+                } else { // 密码登录
+                    if (!this.userInfo.username) {
+                        this.$message.error('请输入用户名');
+                        return;
+                    }
+                    if (!this.userInfo.password) {
+                        this.$message.error('请输入密码');
+                        return;
+                    }
+                    let _this = this
                 console.log(this.userInfo.username)
                 console.log(this.userInfo.password)
                 $.ajax({
@@ -207,10 +226,11 @@
                         }
                     }
                 })
+            }
             },
             handleEnter() {
                 this.login();
-            }
+            },
         }
     })
 </script>
