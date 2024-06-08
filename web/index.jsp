@@ -33,7 +33,6 @@
             text-align: center;
             padding-top: 20px;
         }
-
         .my-button {
             width: 200px;
             height: 40px;
@@ -64,7 +63,6 @@
                 width: 170px;
             }
         }
-
         .choiceBox{
             display: flex;
             justify-content: center;
@@ -98,6 +96,12 @@
             }
             margin-bottom: 30px;
         }
+        .fade-line {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .hidden{
+            opacity: 0;
+        }
     </style>
 
 </head>
@@ -114,11 +118,11 @@
             <div class="itemBox">
                 <div class="choiceItem" @click="isMessage=true">
                     <div class="text"  :class="isMessage?'active':'noActive'">短信登录</div>
-                    <div class="line" v-show="isMessage"></div>
+                    <div class="line" :class="{ 'fade-line': true, 'hidden': !isMessage }"></div>
                 </div>
                 <div class="choiceItem" @click="isMessage=false">
                     <div class="text"  :class="!isMessage?'active':'noActive'">密码登录</div>
-                    <div class="line" v-show="!isMessage"></div>
+                    <div class="line" :class="{ 'fade-line': true, 'hidden': isMessage }"></div>
                 </div>
             </div>
         </div>

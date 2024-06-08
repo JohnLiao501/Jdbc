@@ -39,7 +39,7 @@
             width: 200px;
             height: 40px;
             border-radius: 10px;
-            background-color: sandybrown;
+            background-color: orange;
             border: none;
             color: white;
             text-align: center;
@@ -51,7 +51,7 @@
         }
         .my-button:hover {
             background-color: black;
-            color: sandybrown;
+            color: orange;
         }
         .imgBox{
             padding: 60px 20px 20px;
