@@ -89,18 +89,24 @@
                     }
                     .line{
                         width: 40px;
-                        height: 2px;
+                        height: 3px;
+                        border-radius: 15px;
                         background-color: orange;
+                        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+                        transform: translateX(0);
                     }
                 }
             }
             margin-bottom: 30px;
         }
-        .fade-line {
-            transition: opacity 0.5s ease-in-out;
+        .line-move {
+            transform: translateX(100px);
         }
-        .hidden{
-            opacity: 0;
+        .rounded-input .el-input__inner {
+            border-radius: 10px !important;
+        }
+        .el-input__inner:hover {
+            border-color:orange;
         }
     </style>
 
@@ -116,30 +122,29 @@
         </div>
         <div class="choiceBox">
             <div class="itemBox">
-                <div class="choiceItem" @click="isMessage=true">
-                    <div class="text"  :class="isMessage?'active':'noActive'">短信登录</div>
-                    <div class="line" :class="{ 'fade-line': true, 'hidden': !isMessage }"></div>
+                <div class="choiceItem" @click="switchLoginType(true)">
+                    <div class="text" :class="isMessage?'active':'noActive'">短信登录</div>
+                    <div class="line" :style="{ transform: isMessage ? 'translateX(0)' : 'translateX(150px)', transition: 'transform 0.3s ease-in-out' }"></div>
                 </div>
-                <div class="choiceItem" @click="isMessage=false">
-                    <div class="text"  :class="!isMessage?'active':'noActive'">密码登录</div>
-                    <div class="line" :class="{ 'fade-line': true, 'hidden': isMessage }"></div>
+                <div class="choiceItem" @click="switchLoginType(false)">
+                    <div class="text" :class="!isMessage?'active':'noActive'">密码登录</div>
                 </div>
             </div>
         </div>
         <el-form label-width="100px" class="login-form" v-show="isMessage">
             <el-form-item>
-                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="phoneInfo.CAPTCHA" placeholder="验证码" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.CAPTCHA" placeholder="验证码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             </el-form>
         <el-form label-width="100px" class="login-form" v-show="!isMessage">
             <el-form-item>
-                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
         </el-form>
         <div class="l-bottom">
@@ -172,6 +177,9 @@
             }
         },
         methods: {
+            switchLoginType(isSms) {
+                this.isMessage = isSms;
+            },
             login() {
                 let _this = this
                 console.log(this.userInfo.username)
