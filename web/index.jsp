@@ -108,6 +108,9 @@
         .el-input__inner:hover {
             border-color:orange;
         }
+        .input-error .el-input__inner {
+            border-color: red;
+        }
     </style>
 
 </head>
@@ -133,18 +136,18 @@
         </div>
         <el-form label-width="100px" class="login-form" v-show="isMessage">
             <el-form-item>
-                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" :class="{ 'input-error': phoneInfo.phoneNumberError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="phoneInfo.CAPTCHA" placeholder="验证码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.CAPTCHA" placeholder="验证码" style="width: 300px" class="rounded-input" :class="{ 'input-error': phoneInfo.CAPTCHAError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             </el-form>
         <el-form label-width="100px" class="login-form" v-show="!isMessage">
             <el-form-item>
-                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" class="rounded-input" :class="{ 'input-error': userInfo.usernameError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" :class="{ 'input-error': userInfo.passwordError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
         </el-form>
         <div class="l-bottom">
@@ -167,11 +170,15 @@
             return {
                 userInfo:{
                     username:"",
-                    password:""
+                    password:"",
+                    usernameError: false,
+                    passwordError: false
                 },
                 phoneInfo:{
                     phoneNumber:"",
-                    CAPTCHA:""
+                    CAPTCHA:"",
+                    phoneNumberError: false,
+                    captchaError: false
                 },
                 isMessage:true
             }
@@ -180,26 +187,41 @@
             switchLoginType(isSms) {
                 this.isMessage = isSms;
             },
+            resetErrors() {
+                this.userInfo.usernameError = false;
+                this.userInfo.passwordError = false;
+                this.phoneInfo.phoneNumberError = false;
+                this.phoneInfo.captchaError = false;
+            },
             login() {
-                if (this.isMessage) { // 短信登录
+                if (this.isMessage) {
                     if (!this.phoneInfo.phoneNumber) {
+                        this.phoneInfo.phoneNumberError = true;
                         this.$message.error('请输入手机号');
                         return;
                     }
+                    this.resetErrors();
                     if (!this.phoneInfo.CAPTCHA) {
+                        this.phoneInfo.CAPTCHAError = true;
                         this.$message.error('请输入验证码');
                         return;
                     }
+                    this.resetErrors();
                     // 这里可以添加发送验证码验证的逻辑，然后再执行登录
-                } else { // 密码登录
+                } else {
                     if (!this.userInfo.username) {
+                        this.userInfo.usernameError = true;
                         this.$message.error('请输入用户名');
                         return;
                     }
+                    this.resetErrors();
                     if (!this.userInfo.password) {
+                        this.userInfo.passwordError = true;
                         this.$message.error('请输入密码');
                         return;
                     }
+                    this.resetErrors();
+
                     let _this = this
                 console.log(this.userInfo.username)
                 console.log(this.userInfo.password)
@@ -210,8 +232,8 @@
                         username: this.userInfo.username,
                         password: this.userInfo.password,
                     },
-                    dataType:"JSON",    //返回的数据格式
-                    success: function(data) {   //返回函数
+                    dataType:"JSON",
+                    success: function(data) {
                         console.log(data)
                         console.log(data.info)
                         if(data.code === 200){

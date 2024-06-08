@@ -140,19 +140,19 @@
                         phoneNumber: this.phoneInfo.phoneNumber,
                         email:this.userInfo.email,
                     },
-                    dataType:"JSON",    //返回的数据格式
-                    success: function(data) {   //返回函数
+                    dataType:"JSON",
+                    success: function(data) {
                         console.log(data)
                         console.log(data.info)
                         if(data.code === 200){
-                            _this.$message.success('欢迎来到提瓦特大陆！')
+                            _this.$message.success('注册成功！即将返回登录页面')
                             setTimeout(function (){
                                 window.location.href = "./home.jsp"
-                            },1000);
+                            },2500);
                         }else {
                             setTimeout(function (){
-                                _this.$message.error('哎呀，登录失败了！');
-                            },1000);
+                                _this.$message.error('抱歉，当前无法注册！');
+                            });
                         }
                     }
                 })
