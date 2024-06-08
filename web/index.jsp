@@ -33,11 +33,24 @@
             text-align: center;
             padding-top: 20px;
         }
-        button{
+
+        .my-button {
             width: 200px;
             height: 40px;
             border-radius: 10px;
+            background-color: sandybrown;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
             margin: auto;
+            cursor: pointer;
+            transition-duration: 0.4s; /* 添加过渡效果 */
+        }
+        .my-button:hover {
+            background-color: black; /* 鼠标放上后变为灰色 */
+            color: sandybrown;
         }
         span{
             margin-left: 50px;
@@ -61,7 +74,7 @@
             </el-form-item>
             </el-form>
         <div class="l-bottom">
-            <button @click="login"><span style="font-size: 130%;margin: auto">启 动 !</span></button>
+            <button @click="login" class="my-button"><span style="font-size: 130%;margin: auto">启 动 !</span></button>
         </div>
         <br>
         <br>
