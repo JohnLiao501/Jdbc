@@ -87,13 +87,15 @@
     <nav>
         <img id="logo-header" src ="img/logo-header-cut.png" alt="原神" class="img">
         <ul>
-            <li><a href="#" style="font-weight: bold;font-size: 20px">首&nbsp;页</a></li>
-            <li><a href="#" style="font-weight: bold;font-size: 20px">角&nbsp;色</a></li>
-            <li><a href="#" style="font-weight: bold;font-size: 20px">世&nbsp;界</a></li>
-            <li><a href="#" style="font-weight: bold;font-size: 20px">新&nbsp;闻</a></li>
+            <li><a href="./home.jsp" style="font-weight: bold;font-size: 20px">首&nbsp;页</a></li>
+            <li><a href="./character.jsp" style="font-weight: bold;font-size: 20px">角&nbsp;色</a></li>
+            <li><a href="./world.jsp" style="font-weight: bold;font-size: 20px">世&nbsp;界</a></li>
+            <li><a href="./news.jsp" style="font-weight: bold;font-size: 20px">新&nbsp;闻</a></li>
+            <li><a href="./aboutus.jsp" style="font-weight: bold;font-size: 20px">关于我们</a></li>
         </ul>
     </nav>
 </header>
+<img src="icon/quality,Q_90.png" alt="Quality Image" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, 370%);">
 <video src="video/纺坠终久之梦.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
 
 <audio id="bgm" autoplay>
