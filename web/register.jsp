@@ -71,6 +71,9 @@
         .el-input__inner:hover {
             border-color:orange;
         }
+        .input-error .el-input__inner {
+            border-color: red;
+        }
     </style>
 
 </head>
@@ -84,16 +87,16 @@
         </div>
         <el-form label-width="100px" class="login-form">
             <el-form-item>
-                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.username" placeholder="用户名" style="width: 300px" class="rounded-input" :class="{ 'input-error': userInfo.usernameError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.password" placeholder="密码" style="width: 300px" class="rounded-input" :class="{ 'input-error': userInfo.passwordError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="phoneInfo.phoneNumber" placeholder="手机号" style="width: 300px" class="rounded-input" :class="{ 'input-error': phoneInfo.phoneNumberError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-input v-model="userInfo.email" placeholder="电子邮箱" style="width: 300px" class="rounded-input" @keyup.enter.native="handleEnter"></el-input>
+                <el-input v-model="userInfo.email" placeholder="电子邮箱" style="width: 300px" class="rounded-input" :class="{ 'input-error': userInfo.emailError }" @keyup.enter.native="handleEnter"></el-input>
             </el-form-item>
         </el-form>
         <div class="l-bottom">
@@ -118,14 +121,53 @@
                     username:"",
                     password:"",
                     email:"",
+                    usernameError: false,
+                    passwordError: false,
+                    emailError:false
                 },
                 phoneInfo:{
                     phoneNumber: "",
+                    phoneNumberError: false
                 }
             }
         },
         methods: {
+            resetErrors() {
+                this.userInfo.usernameError = false;
+                this.userInfo.passwordError = false;
+                this.phoneInfo.phoneNumberError = false;
+                this.phoneInfo.captchaError = false;
+            },
             login() {
+                let username = this.userInfo.username.trim();
+                let password = this.userInfo.password.trim();
+                let phoneNumber = this.phoneInfo.phoneNumber.trim();
+                let email = this.userInfo.email.trim();
+                if (!username) {
+                    this.userInfo.usernameError = true;
+                    this.$message.error('请输入用户名');
+                    return;
+                }
+                this.resetErrors();
+                if (!password) {
+                    this.userInfo.passwordError = true;
+                    this.$message.error('请输入密码');
+                    return;
+                }
+                this.resetErrors();
+                if (!phoneNumber) {
+                    this.phoneInfo.phoneNumberError = true;
+                    this.$message.error('请输入手机号');
+                    return;
+                }
+                this.resetErrors();
+                if (!email) {
+                    this.userInfo.emailError = true;
+                    this.$message.error('请输入电子邮箱');
+                    return;
+                }
+                this.resetErrors();
+
                 let _this = this
                 console.log(this.userInfo.username)
                 console.log(this.userInfo.password)
@@ -154,6 +196,10 @@
                                 _this.$message.error('抱歉，当前无法注册！');
                             });
                         }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // 这里可以添加处理 AJAX 请求失败的情况
+                        _this.$message.error('注册请求失败：' + textStatus);
                     }
                 })
             },
