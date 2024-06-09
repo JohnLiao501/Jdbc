@@ -239,7 +239,7 @@
                             _this.$message.success('欢迎来到提瓦特大陆！')
                             setTimeout(function (){
                                 window.location.href = "./home.jsp"
-                            },2500);
+                            },2000);
                         }else {
                             setTimeout(function (){
                                 _this.$message.error('哎呀，登录失败了！');
