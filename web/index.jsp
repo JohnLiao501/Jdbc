@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>原神</title>
+    <title>《原神》</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
     <style>
@@ -112,11 +112,10 @@
             border-color: red;
         }
     </style>
-
 </head>
 <body>
-    <video src="video/原神.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
-    <img src ="img/ys.png" alt="原神">
+<video src="video/原神.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
+<img src ="img/ys.png" alt="原神">
 
 <div id="app">
     <div class="login">

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>注册</title>
+    <title>《原神》注册页面</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 
     <style>
@@ -16,7 +16,7 @@
             width:600px;
             height:570px;
             background-color: #F5F5DC;
-            opacity: 0.90;
+            opacity: 0.80;
             margin:0 auto;
             border-radius: 15px 15px 15px 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
@@ -59,7 +59,7 @@
             display: flex;
             justify-content: center;
             img{
-                width: 170px;
+                width: 180px;
             }
         }
         span{
@@ -78,12 +78,12 @@
 
 </head>
 <body>
-<video src="video/纺坠终久之梦.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
+<video src="video/跨越尘世,于此相遇.mp4" style="width: 100%;height: 100%;object-fit: cover;position: fixed;top: 0;left: 0;z-index: -1" autoplay="autoplay" loop="loop" muted="muted"></video>
 <img src ="img/ys.png" alt="原神">
 <div id="app">
     <div class="login">
         <div class="imgBox">
-            <img src="img/mhyLogo2.png">
+            <img src="img/mhyLogo.png">
         </div>
         <el-form label-width="100px" class="login-form">
             <el-form-item>
@@ -102,7 +102,6 @@
         <div class="l-bottom">
             <button @click="login" class="my-button" id="my-button"><span style="font-size: 130%;margin: auto;font-weight: bold">注 册</span></button>
         </div>
-        <br>
         <br>
         <span>已有帐户？<a href="./index.jsp">立即登录！</a> </span>
     </div>
