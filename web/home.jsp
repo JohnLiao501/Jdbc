@@ -32,7 +32,7 @@
         }
 
         header {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8); /* 半透明背景 */
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -72,7 +72,7 @@
         }
 
         nav ul li a:hover {
-            background-color: #555;
+            background-color: gray;
         }
 
         #header-logo {
@@ -87,10 +87,10 @@
     <nav>
         <img id="logo-header" src ="img/logo-header-cut.png" alt="原神" class="img">
         <ul>
-            <li><a href="#">首&nbsp;页</a></li>
-            <li><a href="#">角&nbsp;色</a></li>
-            <li><a href="#">世&nbsp;界</a></li>
-            <li><a href="#">新&nbsp;闻</a></li>
+            <li><a href="#" style="font-weight: bold;font-size: 20px">首&nbsp;页</a></li>
+            <li><a href="#" style="font-weight: bold;font-size: 20px">角&nbsp;色</a></li>
+            <li><a href="#" style="font-weight: bold;font-size: 20px">世&nbsp;界</a></li>
+            <li><a href="#" style="font-weight: bold;font-size: 20px">新&nbsp;闻</a></li>
         </ul>
     </nav>
 </header>
@@ -139,8 +139,6 @@
     });
 
 </script>
-
-
 
 </body>
 </html>

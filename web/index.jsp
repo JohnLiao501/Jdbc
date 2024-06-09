@@ -26,7 +26,6 @@
             padding-top: 50px;
         }
         .login-form{
-            /*padding-top: 50px;*/
             margin: auto;
         }
         .l-bottom{
